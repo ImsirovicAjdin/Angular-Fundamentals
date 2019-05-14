@@ -1,314 +1,38 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { EventService } from './shared/event.service';
 
 @Component({
     selector: 'events-list',
     templateUrl: './events-list.component.html'
 })
-export class EventsListComponent {
-    events = [
-        {
-            id: 1,
-            name: 'Angular Connect',
-            date: '9/26/2036',
-            time: '10:00 am',
-            price: 599.99,
-            imageUrl: '/assets/images/angularconnect-shield.png',
-            location: {
-                address: '1057 DT',
-                city: 'London',
-                country: 'England'
-            },
-            sessions: [
-                {
-                    id: 1,
-                    name: "Using Angular 4 Pipes",
-                    presenter: "Peter Bacon Darwin",
-                    duration: 1,
-                    level: "Intermediate",
-                    abstract: `Learn all about the new pipes in Angular 4, both 
-              how to write them, and how to get the new AI CLI to write 
-              them for you. Given by the famous PBD, president of Angular 
-              University (formerly Oxford University)`,
-                    voters: ['bradgreen', 'igorminar', 'martinfowler']
-                },
-                {
-                    id: 2,
-                    name: "Getting the most out of your dev team",
-                    presenter: "Jeff Cross",
-                    duration: 1,
-                    level: "Intermediate",
-                    abstract: `We all know that our dev teams work hard, but with 
-              the right management they can be even more productive, without 
-              overworking them. In this session I'll show you how to get the 
-              best results from the talent you already have on staff.`,
-                    voters: ['johnpapa', 'bradgreen', 'igorminar', 'martinfowler']
-                },
-                {
-                    id: 3,
-                    name: "Angular 4 Performance Metrics",
-                    presenter: "Rob Wormald",
-                    duration: 2,
-                    level: "Advanced",
-                    abstract: `Angular 4 Performance is hot. In this session, we'll see 
-              how Angular gets such great performance by preloading data on 
-              your users devices before they even hit your site using the 
-              new predictive algorithms and thought reading software 
-              built into Angular 4.`,
-                    voters: []
-                },
-                {
-                    id: 4,
-                    name: "Angular 5 Look Ahead",
-                    presenter: "Brad Green",
-                    duration: 2,
-                    level: "Advanced",
-                    abstract: `Even though Angular 5 is still 6 years away, we all want 
-              to know all about it so that we can spend endless hours in meetings 
-              debating if we should use Angular 4 or not. This talk will look at 
-              Angular 6 even though no code has yet been written for it. We'll 
-              look at what it might do, and how to convince your manager to 
-              hold off on any new apps until it's released`,
-                    voters: []
-                },
-                {
-                    id: 5,
-                    name: "Basics of Angular 4",
-                    presenter: "John Papa",
-                    duration: 2,
-                    level: "Beginner",
-                    abstract: `It's time to learn the basics of Angular 4. This talk 
-              will give you everything you need to know about Angular 4 to 
-              get started with it today and be building UI's for your self 
-              driving cars and butler-bots in no time.`,
-                    voters: ['bradgreen', 'igorminar']
-                }
-            ]
-        },
-        {
-            id: 2,
-            name: 'ng-nl',
-            date: '4/15/2037',
-            time: '9:00 am',
-            price: 950.00,
-            imageUrl: '/assets/images/ng-nl.png',
-            onlineUrl: 'http://ng-nl.org',          
-            sessions: [
-                {
-                    id: 1,
-                    name: "Testing Angular 4 Workshop",
-                    presenter: "Pascal Precht & Christoph Bergdorf",
-                    duration: 4,
-                    level: "Beginner",
-                    abstract: `In this 6 hour workshop you will learn not only how to test Angular 4, 
-              you will also learn how to make the most of your team's efforts. Other topics
-              will be convincing your manager that testing is a good idea, and using the new
-              protractor tool for end to end testing.`,
-                    voters: ['bradgreen', 'igorminar']
-                },
-                {
-                    id: 2,
-                    name: "Angular 4 and Firebase",
-                    presenter: "David East",
-                    duration: 3,
-                    level: "Intermediate",
-                    abstract: `In this workshop, David East will show you how to use Angular with the new
-              ultra-real-time 5D Firebase back end, hosting platform, and wine recommendation engine.`,
-                    voters: ['bradgreen', 'igorminar', 'johnpapa']
-                },
-                {
-                    id: 3,
-                    name: "Reading the Angular 4 Source",
-                    presenter: "Patrick Stapleton",
-                    duration: 2,
-                    level: "Intermediate",
-                    abstract: `Angular 4's source code may be over 25 million lines of code, but it's really 
-              a lot easier to read and understand then you may think. Patrick Stapleton will talk
-              about his secretes for keeping up with the changes, and navigating around the code.`,
-                    voters: ['martinfowler']
-                },
-                {
-                    id: 4,
-                    name: "Hail to the Lukas",
-                    presenter: "Lukas Ruebbelke",
-                    duration: 1,
-                    level: "Beginner",
-                    abstract: `In this session, Lukas will present the 
-              secret to being awesome, and how he became the President 
-              of the United States through his amazing programming skills, 
-              showing how you too can be success with just attitude.`,
-                    voters: ['bradgreen']
-                },
-            ]
-        },
-        {
-            id: 3,
-            name: 'ng-conf 2037',
-            date: '5/4/2037',
-            time: '9:00 am',
-            price: 759.00,
-            imageUrl: '/assets/images/ng-conf.png',
-            location: {
-                address: 'The Palatial America Hotel',
-                city: 'Salt Lake City',
-                country: 'USA'
-            },
-            sessions: [
-                {
-                    id: 1,
-                    name: "How Elm Powers Angular 4",
-                    presenter: "Murphy Randle",
-                    duration: 2,
-                    level: "Intermediate",
-                    abstract: `We all know that Angular is written in Elm, but did you
-              know how the source code is really written? In this exciting look
-              into the internals of Angular 4, we'll see exactly how Elm powers
-              the framework, and what you can do to take advantage of this knowledge.`,
-                    voters: ['bradgreen', 'martinfowler', 'igorminar']
-                },
-                {
-                    id: 2,
-                    name: "Angular and React together",
-                    presenter: "Jamison Dance",
-                    duration: 2,
-                    level: "Intermediate",
-                    abstract: `React v449.6 has just been released. Let's see how to use 
-              this new version with Angular to create even more impressive applications.`,
-                    voters: ['bradgreen', 'martinfowler']
-                },
-                {
-                    id: 3,
-                    name: "Redux Woes",
-                    presenter: "Rob Wormald",
-                    duration: 1,
-                    level: "Intermediate",
-                    abstract: `Everyone is using Redux for everything from Angular to React to 
-              Excel macros, but you're still having trouble grasping it? We'll take a look
-              at how farmers use Redux when harvesting grain as a great introduction to 
-              this game changing technology.`,
-                    voters: ['bradgreen', 'martinfowler', 'johnpapa']
-                },
-                {
-                    id: 4,
-                    name: "ng-wat again!!",
-                    presenter: "Shai Reznik",
-                    duration: 1,
-                    level: "Beginner",
-                    abstract: `Let's take a look at some of the stranger pieces of Angular 4,
-              including neural net nets, Android in Androids, and using pipes with actual pipes.`,
-                    voters: ['bradgreen', 'martinfowler', 'igorminar', 'johnpapa']
-                },
-                {
-                    id: 5,
-                    name: "Dressed for Success",
-                    presenter: "Ward Bell",
-                    duration: 2,
-                    level: "Beginner",
-                    abstract: `Being a developer in 2037 is about more than just writing bug-free code. 
-              You also have to look the part. In this amazing expose, Ward will talk you through
-              how to pick out the right clothes to make your coworkers and boss not only
-              respect you, but also want to be your buddy.`,
-                    voters: ['bradgreen', 'martinfowler']
-                },
-                {
-                    id: 6,
-                    name: "These aren't the directives you're looking for",
-                    presenter: "John Papa",
-                    duration: 2,
-                    level: "Intermediate",
-                    abstract: `Coinciding with the release of Star Wars Episode 18, this talk will show how
-              to use directives in your Angular 4 development while drawing lessons from the new movie,
-              featuring all your favorite characters like Han Solo's ghost and Darth Jar Jar.`,
-                    voters: ['bradgreen', 'martinfowler']
-                },
-            ]
-        },
-        {
-            id: 4,
-            name: 'UN Angular Summit',
-            date: '6/10/2037',
-            time: '8:00 am',
-            price: 800.00,
-            imageUrl: '/assets/images/basic-shield.png',
-            location: {
-                address: 'The UN Angular Center',
-                city: 'New York',
-                country: 'USA'
-            },
-            sessions: [
-                {
-                    id: 1,
-                    name: "Diversity in Tech",
-                    presenter: "Sir Dave Smith",
-                    duration: 2,
-                    level: "Beginner",
-                    abstract: `Yes, we all work with cyborgs and androids and Martians, but 
-              we probably don't realize that sometimes our internal biases can make it difficult for
-              these well-designed coworkers to really feel at home coding alongside us. This talk will
-              look at things we can do to recognize our biases and counteract them.`,
-                    voters: ['bradgreen', 'igorminar']
-                },
-                {
-                    id: 2,
-                    name: "World Peace and Angular",
-                    presenter: "US Secretary of State Zach Galifianakis",
-                    duration: 2,
-                    level: "Beginner",
-                    abstract: `Angular has been used in most of the major peace brokering that has
-              happened in the last decade, but there is still much we can do to remove all
-              war from the world, and Angular will be a key part of that effort.`,
-                    voters: ['bradgreen', 'igorminar', 'johnpapa']
-                },
-                {
-                    id: 3,
-                    name: "Using Angular with Androids",
-                    presenter: "Dan Wahlin",
-                    duration: 3,
-                    level: "Advanced",
-                    abstract: `Androids may do everything for us now, allowing us to spend all day playing 
-              the latest Destiny DLC, but we can still improve the massages they give and the handmade
-              brie they make using Angular 4. This session will show you how.`,
-                    voters: ['igorminar', 'johnpapa']
-                },
-            ]
-        },
-        {
-            id: 5,
-            name: 'ng-vegas',
-            date: '2/10/2037',
-            time: '9:00 am',
-            price: 400.00,
-            imageUrl: '/assets/images/ng-vegas.png',
-            location: {
-                address: 'The Excalibur',
-                city: 'Las Vegas',
-                country: 'USA'
-            },
-            sessions: [
-                {
-                    id: 1,
-                    name: "Gambling with Angular",
-                    presenter: "John Papa",
-                    duration: 1,
-                    level: "Intermediate",
-                    abstract: `No, this talk isn't about slot machines. We all know that 
-              Angular is used in most waiter-bots and coke vending machines, but
-              did you know that was also used to write the core engine in the majority
-              of voting machines? This talk will look at how all presidential elections
-              are now determined by Angular code.`,
-                    voters: ['bradgreen', 'igorminar']
-                },
-                {
-                    id: 2,
-                    name: "Angular 4 in 60ish Minutes",
-                    presenter: "Dan Wahlin",
-                    duration: 2,
-                    level: "Beginner",
-                    abstract: `Get the skinny on Angular 4 for anyone new to this great new technology.
-              Dan Wahlin will show you how you can get started with Angular in 60ish minutes, 
-              guaranteed!`,
-                    voters: ['bradgreen', 'igorminar', 'johnpapa']
-                }
-            ]
-        }
-    ]
+export class EventsListComponent implements OnInit {
+
+    events:any[]
+
+    constructor(private eventService: EventService) {
+      
+    }
+    /* 
+    The above is shorthand for saying:
+    
+    eventService
+    constructor(private eventService: EventService) {
+        this.eventService = eventService
+    }
+
+    */
+    ngOnInit() {
+      this.events = this.eventService.getEvents()
+    }
+
 }
+/*
+(1)
+Creating Your First Service
+Before we jump in, I just wanted to remind you that we've made changes to this course to keep it up-to-date. This course was originally created without the CLI, since it was still in beta. 
+Because of these updates, you may notice some inconsistencies in the file explorer over here. Those inconsistencies have been explained previously. Okay so as we've seen our EventsListComponent has all of our data hard 
+coded right here. Eventually we will be getting this data from an API and we could just add that API call right here in our component but then our component starts to take on too many responsibilities. We'd really like to just let another service take care of the details of making that HTTP call. It would be nice if we could just call a function here and not worry about the implementation here in our component. So let's create a service that 
+will take care of that for us. Alright so inside our events folder, we will create a new folder called shared where we can put some shared elements. And then in that folder we'll create a new typescript file for our service. Okay so in here, we're going to create and export an eventService class. And it will have a method on it to retrieve the events. Alright so eventually this GetEvents method will be the thing that will make the Ajax 
+call to fetch the events from a server. But we'll get into that later. For now, let's just hard code the events and return them directly. So let's grab them out of our EventsListComponent. We'll just copy this array out here and delete this and then over here in our service, we will just add it as a constant down here. Okay and then we'll just go ahead and collapse that so it's not distracting, and then we'll just have our getEvents method 
+return those events. Okay so here we have our service. It's just a class and technically, this is all we really need. We could now inject this service into our component or other services. But it's always a good practice to mark services as injectable like this. Adding this injectable decorator is important for any service that you're going to inject into your components or another service. And it's important that you don't forget to put parenthesis on the end of here like this. That's an easy thing to forget. This injectable decorator isn't really required for this service. Because this decorator is only required when you inject a service which also injects other services as dependencies of its own. Just to clarify what I mean by injecting a service, I don't mean imports. I mean if you have a constructor that injects services like this. So now that this eventsService injects the HTTP service. This injectable decorator is required. And since you never really know if a service is going to take a dependency later, it's just a best practice to always add it. We don't need this HTTP dependency yet. So let's undo that but we will leave the injectable decorator even though it's not technically required yet. So now we just need to let our app know that this service exists. We do that by registering it in our app module. First let's fix this spelling error. Then we'll come over to our app module and we'll import it. And then we will add it as a provider down here. Okay now that it's registered as a provider, Angular's injector is aware of this. So whenever we request it in another component or service, Angular will know where to go to get this service. Alright so now Angular knows how to inject this. Let's go ahead and inject it into our EventsListComponent. So we just do that in our constructor like this. Okay cool, so we'll just have to go ahead and import the EventService. Okay that's all there is to injecting a service once it's registered. Remember this private syntax right here is shorthand for saying essentially that we have a property on our class like this and like we are saying this. eventService equals eventService. This is short hand for that syntax essentially. So angular will look at the constructor for this component and see that we want an eventService and it will go out and construct that or grab it from the injector and inject it in right here. So now what we have to do is use it and we'll just do it in our constructor for now, which is a bad idea but we'll come back to that and fix it later. For now, let's just add it right here. Okay we need to declare this events variable. We will just declare it as an array of any data type. Okay cool so let's go take a look at this. First, let's make sure our server is running. Okay now let's come over to our app and refresh and this should still work just fine. So this is working great. Now back in our component, remember I said it's not a good idea to put this in our constructor. It's really not a good idea to put things in your constructor that are potentially long running. And eventually this will be an ajax call. And so this will take a little while to fetch those events. So we really shouldn't do it in our constructor, and yet we need to have this happen when our component first loads. So where we can do this, if not in the constructor? Well components have lifecycle hooks that you can hook into and one of those is the ngOnInit method. So that lifecycle event is called when the component is being loaded. So let's create an ngOnInit method. And then let's move this code into there. Okay we still need our constructor even though it's not doing anything in the body because that's where our service gets injected. But then we can access the service elsewhere in our class like we are here in ngOnInit. This will work just fine if we go over and take a look and refresh here. This is still working great. Only it actually fetched that data in the ngOnInit event. And then just as a side note, we can also take advantage of some Angular typescript declarations and let typescript know that this component implements ngOnInit like this. And then we just need to import OnInit. Okay cool now if we were to remove our ngOnInit here, we would get a warning indicating that it should be implemented because we are implementing it here on our class. So we can just add that implementation and then we're getting a little bit of typescript compilation safety. Okay cool. Now we have a functioning eventService and there is a practice exercise for this script. So go check that out.
+*/
