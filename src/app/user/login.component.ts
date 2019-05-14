@@ -17,7 +17,8 @@ export class LoginComponent {
   }
 
   login(formValues) {
-    this.router.navigate(['events'])
+    // this.router.navigate(['events'])
+    console.log(formValues)
   }
 
   cancel() {
