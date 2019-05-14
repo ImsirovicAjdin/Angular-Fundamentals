@@ -36,7 +36,8 @@ export class EventThumbnailComponent {
 
     getStartTimeClass() {
         if (this.event && this.event.time === '8:00 am')
-        return 'green bold'
+            return 'green bold'
+        return ''
     }
 } 
 
@@ -66,7 +67,9 @@ Okay, now we can just return our object. Okay, cool, this should be working the 
 (4)
 So let's see how this would look if we were going to return a string.
 
-So basically we would replace this with an if statement. And then inside here, we would return a string with the classes we want applied if this is true. And otherwise, we'll return an empty string. Alright, so this should be working too. Great. And then the last thing that we could do is 
+So basically we would replace this with an if statement. And then inside here, we would return a string with the classes we want applied if this is true. 
+(5)
+And otherwise, we'll return an empty string. Alright, so this should be working too. Great. And then the last thing that we could do is 
 
 instead of returning a string, we could return an array or an empty array.
 
