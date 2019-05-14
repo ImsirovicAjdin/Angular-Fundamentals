@@ -1,18 +1,22 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  template: `
-    <h1>Edit Your Profile</h1>
-    <hr>
-    <div class="col-md-6">
-      <h3>[Edit profile form will go here]</h3>
-      <br />
-      <br />
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-default">Cancel</button>
-    </div>
-  `,
+  templateUrl: './profile.component.html',
 })
-export class ProfileComponent {
-       
+export class ProfileComponent implements OnInit {
+
+  profileForm:FormGroup
+  
+
+  ngOnInit() {
+    let firstname = new FormControl()
+    let lastName = new FormControl()
+    this.profileForm = new FormGroup({
+      firstName: firstname,
+      lastName: lastName
+
+    })
+  }
+
 }
