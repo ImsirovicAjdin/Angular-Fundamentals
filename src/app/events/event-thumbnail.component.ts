@@ -23,14 +23,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     .well div { color: #bbb; }
   `]
 })
-export class EventThumbnailComponent {
-        // (1) Making things more interesting by emitting some actual data from our child component: the name of the technology event that's displayed in the event thumbnail; 
-       //(1) here we're receiving in our conference event
-        //     |          
-    @Input() event:any // (2) our conference event has a name property on it
+export class EventThumbnailComponent {    
+    @Input() event:any
     @Output() eventClick = new EventEmitter()
  
     handleClickme() {
-        this.eventClick.emit(this.event.name) // (2) so let's just log that name property out
+        this.eventClick.emit(this.event.name)
     }
 } 
