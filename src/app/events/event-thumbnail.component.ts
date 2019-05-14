@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
       <h2>{{event?.name}}</h2>
       <div>Date: {{event?.date}}</div>
       <div>Time: {{event?.time}}</div>
-<div [ngSwitch]="event?.time">
+<div [class.green]="event?.time === '8:00 am'" [ngSwitch]="event?.time">
     <span *ngSwitchCase="'8:00 am'">Early Start</span>
     <span *ngSwitchCase="'10:00 am'">Late Start</span>
     <span *ngSwitchDefault>Normal Start</span>
@@ -24,6 +24,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
     </div>
   `,
   styles: [`
+    .green { color: #003300 !important }
     .thumbnail { min-height: 210px; }
     .pad-left { margin-left: 10px; }
     .well div { color: #bbb; }
@@ -34,15 +35,32 @@ export class EventThumbnailComponent {
 } 
 
 /*
+(1)
+Styling Components with ngClass
+There are a couple of ways to conditionally add CSS classes to elements with Angular and they're both pretty easy. 
 
-Okay, so we've shown how to change the visibility of elements using ngif and by binding to the hidden property of a DOM element. 
+Class bindings are good if you're wanting to toggle a single class. 
+And the ngClass directive is better if you're wanting to toggle multiple classes. 
 
-But what if there's a part of our document that we want to change based on multiple possible values of an expression? 
+So let's take a look at class bindings first. Let's make it so that the start time of event turns green if it is an early start event, meaning it starts at 8:00 a. m. Okay, so on this div that surrounds the event time, we're going to add a binding that looks like this. Okay, so this looks a lot like a property binding. But there is no property class. green on a div. So what is this? This is a special type of binding called a class binding. And it is parsed by Angular and it's basically saying that if this expression event. time equals 8:00 a. m., returns true, then add the green class to this div. Okay, so let's add that class to our styles and then take a look at it. Okay, I'm using important here because otherwise this style will get overwritten by another one. This has nothing to do with the fact that we're using a class binding. It's just the nature of the CSS that exists in our app. And I could make this CSS binding a little more specific and not use important. But we'll just do it this way for now. So let's go take a look at this over in our app. Okay, cool, you can see that time is green only for the 8:00 a. m. event and not for the others. So this is working great. 
 
-That's where ngSwitch comes in. So let's add something to our event that will tell us whether the conference starts earlier or later based on the event time. So we're going to add a div right here. And inside that div we'll have three spans. One that says early start. One that says late start. And then, another one that says normal start. Okay, and then we want to show and hide these based upon the event time. So I'm going to add an ngSwitch up here and that'll just get bound to the event time. 
+But what if we also wanted to add a second class, say a bold class to this element? That's where ngClass comes in. 
 
-And notice for ngif and ngSwitch and other things, we also have to use the safe navigation operator to guard against nulls. 
+(2)
+Let's create a bold class. And then we'll use ngClass to add both the green class and the bold class. We can do that with an ngClass expression like this. So instead of a class binding, we'll use ngClass. And then, here, we'll return an object. And that object will have two properties on it. One for each class we want to apply. So the first one will be green and then it'll have an expression that looks like this. Okay, so this ngClass expression will apply the green class if the event time equals 8:00 a. m. And then let's just apply a second class and we'll use the same expression here but we could use a different one. Okay, 
 
-Okay, so now I have a ngSwitch that is bound to my event time. Now, on my spans, I just need to add ngSwitch case statements. And then I set this to the value that should allow early start to be displayed. So, in this case, I'm going to bind this to the value of 8:00 a. m. Okay, so this span has an ngSwitch case directive that is bound to the string value of 8:00 a. m. Let's do the same thing for these others. So, for late start, we will bind it to the value 10:00 a. m. And then for normal start, this will be our default case so if 8:00 a. m. doesn't match and 10:00 a. m. doesn't match then this will be displayed. And we do that with ngSwitch default. Okay, so now we have this div that's bound to our event time using ngSwitch and the cases are early start, late start and normal start with normal start being the default. Okay, so let's go take a look at this. So I'm going to refresh my page here. Okay, so cool, you can see that this one that starts at 10:00 a. m. says late start. This one that starts at 9:00 a. m. says normal start. And this one that starts at 8:00 a. m. says early start. Okay, cool, that was easy. Now we would like these values to show up right after the time. So let's go over and take a look at our HTML here. So they're showing on a new line because this is a div not a span. Really we want this to show up right after the time up here on the same line. So just to demonstrate there's nothing special about this ngSwitch. It doesn't have to be on its own div. We could take this and move that up here like this. And then we could move these spans up here and delete this div. And since this will be displaying right after the time, let's add some parentheses around it. Okay, let's go take a look at that. Alright, cool, so now that's showing up on the same line. Now our ngSwitch example here is using event time which is a string. And so the ngSwitch case values are also strings. Notice that they are wrapped in apostrophes. But ngSwitch doesn't have to work with strings. It can be any data type. And in the ngSwitch case statement expressions should also return the same data type. And that's all there is to using ngSwitch. And there's a practice exercise for this clip so go check that out.
+so the ngClass binding is going to expect an object where the object keys are the names of the classes you want to add and the values are a Boolean expression that determines whether or not that class should be shown. 
+
+So this will add the green class and the bold class if the event time is 8:00 a. m.. So this should be working. Let's take a look. Okay, cool, so now both the green and the bold classes are being applied to this element. Okay, if we come back over to our code and we look at this expression that we've applied for ngClass, it's starting to be a lot of logic to exist in our template. 
+
+So, instead of this, let's actually call a function on our component. Alright, now let's add that class to our component or that function. Alright, and then, rather than running the calculation twice, let's run it once and assign it to a constant. Okay, now we can just return our object. Okay, cool, this should be working the same. And it is. And then, I had said earlier that ngClass expects an object to be returned. That isn't exactly the whole truth. You can actually return an object like this or you can return a string, which is space separated list of the classes you want applied. Or you can return an array of strings, which represent the classes you want to apply. 
+
+So let's see how this would look if we were going to return a string.
+
+So basically we would replace this with an if statement. And then inside here, we would return a string with the classes we want applied if this is true. And otherwise, we'll return an empty string. Alright, so this should be working too. Great. And then the last thing that we could do is 
+
+instead of returning a string, we could return an array or an empty array.
+
+Okay, and that should work just fine too. Cool, so you have various different approaches that you can use here depending on the needs of your application and your particular style. And then one last thing that I want to mention here. What if on the element that you're adding ngClass to or doing a class binding on, what if this already had a class applied to it? Something like this. Well, that's okay actually. What would happen here is the well class would always be applied to this div. And then any classes that are applied conditionally with ngClass will be added in addition to this class. And that's true for both class bindings and ngClass. And so that's the two different ways you can apply classes to elements. And there's a practice exercise for this clip. So go check that out.
 
 */
