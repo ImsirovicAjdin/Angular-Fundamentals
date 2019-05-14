@@ -7,7 +7,7 @@ import { EventRouteActivator } from './events/event-details/event-route-activato
 
 
 export const appRoutes:Routes = [
-  { path: 'events/new', component: CreateEventComponent },    
+  { path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },    
   { path: 'events', component: EventsListComponent },
   { path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivator] }, // /events/1 or /events/foo
   { path: '404', component: Error404Component },
