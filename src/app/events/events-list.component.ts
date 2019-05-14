@@ -18,8 +18,4 @@ export class EventsListComponent {
       country: 'England'
     }
   }
-
-  handleEventClicked(data) {
-      alert(`received: ${data}`)
-  }
 }
