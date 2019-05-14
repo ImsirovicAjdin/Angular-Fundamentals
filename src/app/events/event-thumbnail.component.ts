@@ -13,7 +13,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
         <span>Location: {{event?.location?.address}}</span>
         <span class="pad-left">{{event?.location?.city}}, {{event?.location?.country}}</span>
       </div>
-      <div>
+      <div [hidden]="!event?.onlineUrl">
         Online URL: {{event?.onlineUrl}}
       </div>
     </div>
