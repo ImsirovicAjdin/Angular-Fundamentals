@@ -91,12 +91,7 @@ export class EventsListComponent {
             time: '9:00 am',
             price: 950.00,
             imageUrl: '/assets/images/ng-nl.png',
-            onlineUrl: 'http://ng-nl.org',
-            location: {
-                address: '1057 DT',
-                city: 'London',
-                country: 'England'
-            },            
+            onlineUrl: 'http://ng-nl.org',          
             sessions: [
                 {
                     id: 1,
