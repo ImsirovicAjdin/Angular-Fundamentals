@@ -36,8 +36,8 @@ export class EventThumbnailComponent {
 
     getStartTimeClass() {
         if (this.event && this.event.time === '8:00 am')
-            return 'green bold'
-        return ''
+            return ['green', 'bold']
+        return []
     }
 } 
 
@@ -70,7 +70,7 @@ So let's see how this would look if we were going to return a string.
 So basically we would replace this with an if statement. And then inside here, we would return a string with the classes we want applied if this is true. 
 (5)
 And otherwise, we'll return an empty string. Alright, so this should be working too. Great. And then the last thing that we could do is 
-
+(6)
 instead of returning a string, we could return an array or an empty array.
 
 Okay, and that should work just fine too. Cool, so you have various different approaches that you can use here depending on the needs of your application and your particular style. And then one last thing that I want to mention here. What if on the element that you're adding ngClass to or doing a class binding on, what if this already had a class applied to it? Something like this. Well, that's okay actually. What would happen here is the well class would always be applied to this div. And then any classes that are applied conditionally with ngClass will be added in addition to this class. And that's true for both class bindings and ngClass. And so that's the two different ways you can apply classes to elements. And there's a practice exercise for this clip. So go check that out.
