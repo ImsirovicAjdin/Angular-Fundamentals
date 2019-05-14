@@ -10,9 +10,9 @@ import { LoginComponent } from './login.component'
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(userRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forChild(userRoutes)
   ],
   declarations: [
     ProfileComponent,
