@@ -5,6 +5,7 @@ import { Component } from '@angular/core'
   templateUrl: './events-list.component.html'
 })
 export class EventsListComponent {
+  // (6) this is the 'event1' we're referencing in (5)
   event1 = {
     id: 1,
     name: 'Angular Connect',
