@@ -30,9 +30,9 @@ import { EventListResolver } from './events/events-list-resolver.service';
     Error404Component
   ],
   providers: [
-    EventService, // shorthand
+    EventService,
     ToastrService, 
-    EventRouteActivator, // { provide: EventService, useValue: EventService } // longhand
+    EventRouteActivator,
     EventListResolver,
     { 
       provide: 'canDeactivateCreateEvent', 
