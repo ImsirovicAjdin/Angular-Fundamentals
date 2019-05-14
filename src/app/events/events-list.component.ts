@@ -19,8 +19,7 @@ export class EventsListComponent {
     }
   }
 
-  // (7b) ...and we'll just console log the data that we've received:
   handleEventClicked(data) {
-      alert('received', data)
+      alert(`received: ${data}`)
   }
 }
