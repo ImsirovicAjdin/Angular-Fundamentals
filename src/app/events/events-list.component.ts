@@ -18,4 +18,9 @@ export class EventsListComponent {
       country: 'England'
     }
   }
+
+  // (7b) ...and we'll just console log the data that we've received:
+  handleEventClicked(data) {
+      alert('received', data)
+  }
 }

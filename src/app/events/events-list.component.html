@@ -1,5 +1,26 @@
 <div>
     <h1>Upcoming Angular Events</h1>
     <hr />
-    <event-thumbnail [event]="event1"></event-thumbnail>
+    <!-- 
+        (6b) We do that by just adding another 
+        event handler to the child component's element
+        in our parent component like this:
+        (eventClick)="handleEventClicked($event)"
+        So this (eventClick) binding has to match the 'eventClick'
+        @Output property that we created on our child component in
+        event-thumbnail.component.ts
+        Basically, we're saying that when the (eventClick) event 
+        is fired on our <event-thumbnail> component, call this
+        handleEventClicked method on my component. This $event
+        refers to the data emitted with our event, and remember,
+        in this case it is the string 'foo'
+        You can only pass a single value with the event emitter,
+        so if you need to pass multiple values, you can just
+        wrap them in an object first;
+        (7a) so let's go ahead and add this 'handleEventClicked(data)'
+        method to events-list.component.ts
+    -->
+    <event-thumbnail 
+        (eventClick)="handleEventClicked($event)"
+        [event]="event1"></event-thumbnail>
 </div>
