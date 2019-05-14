@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
       <h2>{{event?.name}}</h2>
       <div>Date: {{event?.date}}</div>
       <div>Time: {{event?.time}}</div>
-<div [ngClass]="{green: event?.time === '8:00 am', bold: event?.time === '8:00am'}" [ngSwitch]="event?.time">
+<div [ngClass]="getStartTimeClass()" [ngSwitch]="event?.time">
     <span *ngSwitchCase="'8:00 am'">Early Start</span>
     <span *ngSwitchCase="'10:00 am'">Late Start</span>
     <span *ngSwitchDefault>Normal Start</span>
@@ -33,6 +33,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 })
 export class EventThumbnailComponent {    
     @Input() event:any
+
+    getStartTimeClass() {
+        const isEarlyStart = this.event && this.event.time === '8:00 am'
+        return {green: isEarlyStart, bold: isEarlyStart }
+    }
 } 
 
 /*
@@ -54,7 +59,10 @@ so the ngClass binding is going to expect an object where the object keys are th
 
 So this will add the green class and the bold class if the event time is 8:00 a. m.. So this should be working. Let's take a look. Okay, cool, so now both the green and the bold classes are being applied to this element. Okay, if we come back over to our code and we look at this expression that we've applied for ngClass, it's starting to be a lot of logic to exist in our template. 
 
-So, instead of this, let's actually call a function on our component. Alright, now let's add that class to our component or that function. Alright, and then, rather than running the calculation twice, let's run it once and assign it to a constant. Okay, now we can just return our object. Okay, cool, this should be working the same. And it is. And then, I had said earlier that ngClass expects an object to be returned. That isn't exactly the whole truth. You can actually return an object like this or you can return a string, which is space separated list of the classes you want applied. Or you can return an array of strings, which represent the classes you want to apply. 
+(3)
+So, instead of this, let's actually call a function on our component. Alright, now let's add that class to our component or that function. Alright, and then, rather than running the calculation twice, let's run it once and assign it to a constant. 
+
+Okay, now we can just return our object. Okay, cool, this should be working the same. And it is. And then, I had said earlier that ngClass expects an object to be returned. That isn't exactly the whole truth. You can actually return an object like this or you can return a string, which is space separated list of the classes you want applied. Or you can return an array of strings, which represent the classes you want to apply. 
 
 So let's see how this would look if we were going to return a string.
 
