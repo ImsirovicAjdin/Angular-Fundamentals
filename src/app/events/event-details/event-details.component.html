@@ -23,7 +23,22 @@
   </div>
 
   <hr>
-
-  <session-list [sessions]="event?.sessions"></session-list>
-
+<!--
+8.3 (1) Passing data out of a child component 
+We just saw how to pass data from a parent component into a sub-component, but what if a sub-component needs to pass data back up to its parent? This is typically done in response to some event on the child component like clicking a button, and this is made possible using output parameters. If you remember we created a create session component previously, but it isn't completely wired up, and it's only available in our application by typing in the url, and when you click save it simply logs the session to console. Let's make it so that we can add sessions right from our event details page. Okay so on our event details page let's start by adding a little header above our sessions with an add session link. Okay so this will just add a little sessions header with an add session link, and that anchor tag when you click on it, it's going to execute code in our component. So it has no href, but when an anchor tag has no href it won't have the pointer cursor when you hover over it. 
+-->
+  <div class="row">
+    <div class="col-md-2">
+      <h3 style="margin:0">Sessions</h3>
+    </div>
+    <div class="col-md-2">
+      <a (click)="addSession()">Add Session</a>
+    </div>
+  </div>
+<!-- 8.3 (5) 
+Alright now we can use that over in our template. So if we're in add mode we're going to hide our session list. Okay so we'll only show that if we're not in add mode, and then instead of the session list when we're in add mode we will show the create session component.
+-->
+  <session-list *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
+  <!-- 8.3 (7) and then we only want to display this if we are in add mode. -->
+  <create-session></create-session>
 </div>
