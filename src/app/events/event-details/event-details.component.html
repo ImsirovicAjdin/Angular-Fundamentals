@@ -34,5 +34,7 @@
   </div>
 
   <session-list *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
-  <create-session></create-session>
+  <!-- 8.3 (13) Let's go bind it to our event details page. Alright now we'll go right here. So we're going to bind to the save new session event, and when that's fired we're going to call save new session, and pass in the event that is emitted. Okay so that event that's being passed along is actually our session object. -->
+  <create-session *ngIf="addMode" (saveNewSession)="saveNewSession($event)" (cancelAddSession)="cancelAddSession()"></create-session>
 </div>
+<!-- 8.3. (26) Okay, and then over in our event details component html we'll just need to bind to that. (above, in (cancelAddSession) )-->

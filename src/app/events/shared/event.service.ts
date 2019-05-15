@@ -19,6 +19,12 @@ export class EventService {
     event.session = []
     EVENTS.push(event)
   }
+  // 8.3 (22) Okay so now we need to go add that update event method on our event service so let's open that up, and we don't want to use this save event because that's for saving new events. We just want to update this existing event. So we will call update event here. Okay so this will just need to find the existing event in the array, and replace it for now.
+  updateEvent(event) {
+    let index = EVENTS.findIndex(x => x.id = event.id)
+    EVENTS[index] = event
+  }
+  // 8.3 (23) Recap so far: Okay so our create session component now emits a save new session event, and we are binding to that in our event details, and when that event is emitted we call save new session on our event details component which adds the session to the event and then updates it. So let's go check that out. Refresh here. Okay so here is our list of sessions. Now let's add a new session. This will be a one hour beginner level session. Alright and then when we save that you can see we excited add mode and if we come down here we have my new session on this event, and if we go back to the event lists page and come back in you can see it's still there. So it did save it in memory to this event.
 }
 
 const EVENTS:IEvent[] = [
