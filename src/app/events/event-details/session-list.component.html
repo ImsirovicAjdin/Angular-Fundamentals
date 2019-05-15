@@ -1,0 +1,15 @@
+<!--
+8.2 (5) Passing data into a child component
+Alright, and that's all there really is to this component other than the html template so let's go add that. Alright, and let's go get the html for this template from our Github helper repo. So over here there's this app folder and then in events and event details there's this session-list component html. Let's grab that and paste that in here. Alright this is pretty simple. So we just have this ngfor that is going to loop over each of the sessions in the array that was passed into our input property, and then display each one
+-->
+<div class="row" *ngFor="let session of sessions">
+    <div class="col-md-10">
+        <div class="well">
+            <h4>{{session.name}}</h4>
+            <h6>{{session.presenter}}</h6>
+            <span>Duration: {{session.duration}}</span>
+            <span>Level: {{session.level}}</span>
+            <p>{{session.abstract}}</p>
+        </div>
+    </div>
+</div>

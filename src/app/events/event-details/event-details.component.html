@@ -21,4 +21,12 @@
       </address>
     </div>
   </div>
+
+  <hr>
+<!-- 8.2 (1)
+Passing Data into a Child Component
+Let's take another look at passing data from one component into another. Right now our event details page is showing basic information about each event, but there's something missing here. Our events have sessions that we're not displaying yet. If we go over to our events service and look at the data that's in there, you can see our events have these session arrays. So let's work on getting those displayed. So over here in our event details html we want to display those right here, right after we show the basic event details information. And so let's add a divider line, and then we'd like to be able to just display our sessions with an element like this. So we'll create a component for this, but how is the sessions list component going to get its array of sessions to display? Well, we have that data available to use on the event object that we're already binding to on this page. So we'd like to just pass it into this component. If you remember from earlier we can just pass data into a child component like this. So this is basically saying I want to bind the session property of this session list component to the sessions array on this event object, and that event object is in our even details component 
+  -->
+  <session-list [sessions]="event?.sessions"></session-list>
+
 </div>
