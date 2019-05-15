@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ISession, restrictedWords } from '../shared/index'
 
 @Component({
-  // 8.3 (6) Alright, but that create session component actually still needs a selector so let's add that. So this is the create session component that we created earlier, 
   selector: 'create-session',
   templateUrl: './create-session.component.html',
 
