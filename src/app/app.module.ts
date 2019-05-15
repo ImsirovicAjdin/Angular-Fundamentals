@@ -1,4 +1,4 @@
-//  8.2 (6) Okay, so we just need to add this component to our event details barrel, and then we just need to add that to our app module. So we'll import it here and add it as a declaration here. Okay, cool let's go check this out. So if we refresh our event details page here. Alright awesome, now we have all of our sessions displaying, and they're displaying for all of our different events. So that's another great reminder of how easy it is to pass data from one component into a sub-component.
+
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule, ActivatedRouteSnapshot } from '@angular/router'
