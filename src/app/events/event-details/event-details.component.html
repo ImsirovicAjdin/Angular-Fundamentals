@@ -3,13 +3,15 @@
 
   <div class="row">
     <div class="col-md-11">
-      <h2>{{event?.name}} </h2>
+      <h2>{{event?.name | uppercase }} </h2>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6">
-      <div><strong>Date:</strong> {{event?.date}}</div>
+      <div><strong>Date:</strong> {{event?.date | date:'short' }}</div>
+      <div><strong>Date:</strong> {{event?.date | date:'shortDate' }}</div>
+      <div><strong>Date:</strong> {{event?.date | date:'y/M/d' }}</div>
       <div><strong>Time:</strong> {{event?.time}}</div>
       <div><strong>Price:</strong> ${{event?.price}}</div>
     </div>
@@ -36,3 +38,8 @@
   <session-list *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
   <create-session *ngIf="addMode" (saveNewSession)="saveNewSession($event)" (cancelAddSession)="cancelAddSession()"></create-session>
 </div>
+<!--
+10.02 Using Built-in Pipes
+Now there's a few problems on our all events page that we can fix with pipes. I want to avoid the most obvious one, the problems with formatting dates for just a second, and instead fix an easier one, which is the names of the events. Notice that the names of the events are cased however the data was given to us. I'd like to fix that. I want all events in uppercase. So we can go over to our code, and into our event-thumbnail-component. ts, and here where we have the event name, we can add a simple pipe of uppercase. This is one of the built in pipes in Angular 2. And I'll save that, go back and refresh the page, and now all the names are in complete uppercase. That gives our page a bit more of a uniform look, and in the details, we've got the same problem. Here the name is not uppercase, so let's go into the details page, and here we're just going to go into the HTML component and add the same uppercase pipe. And we'll refresh, and now the name is all in uppercase. Now we've got the obvious problem, the date. These dates are obviously not the way that we want them formatted, so we're going to go in to the date, and we're going to add a date pipe. We'll just simply add date, save that, and refresh, and we can see that already the date is formatted much nicer than it was before. Now this is the default formatting for the date pipe. We could actually change the formatting using parameters. Parameters on pipes are very simple, you put in a colon, and then you can add the parameter you want. In the case of the date pipe, the parameter that it takes in is a string, and there are several values for what the string can be. There's some pre-built in values like short. That's how the short looks, or just short date, which gets rid of the time. And that's what I want to use. You can also mess around with values like... Y for the year, a capital M for the month, d for the day, and you can add in slashes on that if you want. So let's make this change, and we'll see the year, slash the month, then the day. We're just going to go back to short date. It's a nice, simple format, and we want to make that same change in our thumbnail component. Okay, and our dates are formatted nice. Now there's one more piece of data I want to put a pipe on, and that is the price. Notice that the price looks fine, it's got the dollar sign and then the price. The formatting is just fine, but the problem is, is that we've hard-coded in our dollar sign, right there. And I don't want those hard-coded in, I want those to be specified. That'll position me up later on, in case I want to use different units. I can parameterize that and some events can be in dollars, some events can be in pounds, some could be in Euros. So, we're going to change this to have a pipe of currency, and we'll get rid of the dollar sign, and of course we had to escape that, so we'll get rid of the backslash as well. And we're going to add some parameters to the currency pipe. We'll want to specify that this is in US dollars, so USD, and here is where we could be reading this from our data. I'm just going to leave this hard-coded to USD for now, but it gives us a place that in the future, we could use different units. So save that, and refresh the page. And we're now back to seeing the dollar signs. And let's make that same change inside of our details page. Change price to currency filter. It's USD, and get rid of the dollar sign, and save. Back to the page and refresh. And we've still got the dollar sign showing, but we're now using a pipe to format the price. And those are some of the more commonly used built-in pipes in Angular 2. There are homework assignments for this clip, so go ahead and do those now.
+
+-->
