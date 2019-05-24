@@ -30,9 +30,9 @@
           </li>
         </ul>
       </div>
-      <form id="searchForm"  class="navbar-form navbar-right"  >
+      <form id="searchForm" (ngSubmit)="searchSessions(searchTerm)"  class="navbar-form navbar-right"  >
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search Sessions" >
+          <input [(ngModel)]="searchTerm" name="searchTerm" type="text" class="form-control" placeholder="Search Sessions" >
         </div>
         <button class="btn btn-default" >
           Search
@@ -41,3 +41,13 @@
     </div>
   </div>
 </div>
+<!--
+12. Creating Directives and Advanced Components in Angular
+
+12.02.  Implementing the Session Search
+
+12.02.01 ngSubmit
+Since this section is about advanced components and directives, we're going to be adding some more interesting functionality to our application. One of the pieces of missing functionality we've got is this search box up here in the NavBar. We'd like to implement that in this section. We'll do a few other things as well, but we're going to start by implementing our search box. This searches sessions, so it's not looking for an event. We've got the events list, so let's just find an event. What we want to do is find a specific session within an event. Maybe we know that somewhere there's a session about pipes, and we're looking for that specific session. Or we just want to look for any session about pipes. So, if the user types in pipe and hits enter or clicks the search button, we want to pop up a list of search results. And from that popped up list, we'll let the user click on a specific session and navigate to the details for that event. That's the functionality we're going to add, and to implement that, we're going to use Bootstrap's modal dialog, which is actually added into jQuery, which means we got to have both jQuery and Bootstrap in order to do this functionality. We're simply going to write the Angular 2 wrappers around that functionality. That'll let us avoid a lot of the complexities with implementing modal dialog boxes, but it's still going to be a fair amount of work on the Angular 2 side. Let's start by hooking up to the event. We're going to go back to our code, and we're going to go into the NavBar component. And down here where the search button is, actually the search form is what we're looking for, we're going to add a new event handler to this form. 
+
+Forms in Angular 2 have a submit event that's actually bound to ngSubmit with a capital S. That's the event. It's a custom event that exists on the form. It's added in by Angular 2. And we're going to hook up to that. What's nice about listening to this event is it doesn't matter if the user hits enter while in the input box or if they click the button, it's still going to fire the submit event. And we'll call a method called search sessions. And we want to pass in the search term that the user is looking for. I'm going to put in a variable called searchTerm that doesn't exist yet. And now, let's create that search term. That's going to be whatever they type into the input box. So, in order to do that, we want to hook up our input box with an ngModel, so we're going to use a banana in a box and the ngModel, and that will be hooked up to search term. We'll have to give it a name, of course. And now, with those in place, let's click save and we'll go into the component.
+-->

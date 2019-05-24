@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core'
+import { Injectable, EventEmitter } from '@angular/core'
 import { Subject, Observable } from 'rxjs'
-import { IEvent } from './event.model'
+import { IEvent, ISession } from './event.model'
 
 @Injectable()
 export class EventService {
@@ -25,7 +25,32 @@ export class EventService {
     EVENTS[index] = event
   }
 
+  searchSessions(searchTerm: string) {
+    var term = searchTerm.toLocaleLowerCase();
+    var results: ISession[] = [];
+
+    EVENTS.forEach(event => {
+      var matchingSessions = event.sessions.filter(sessions => sessionStorage.name.toLocaleLowerCase().indexOf(term) > -1);
+      matchingSessions = matchingSessions.map((session:any) => {
+        sessionStorage.eventId = event.id;
+        return session;
+      })
+      results = results.concat(matchingSessions);
+    })
+
+    var emitter = new EventEmitter(true);
+    setTimeout(() => {
+      emitter.emit(results);
+
+    }, 1400);
+    return emitter;
+  } 
 }
+/*
+12.02.03 searchSessions() in event.service.ts
+And let's just put it right after updateEvent. Remember, it takes in a search term, which we know is a string. Let's lowercase that, just to make it a little easier, so that no matter what case the user types in, it will be consistent. And we'll need a list of results that'll start out as an empty array. And of course, those are ISessions. And we'll initialize that to an empty array. We don't have the ISession, and we don't have the interface brought in, so let's go up and import it. And now, to find the correct session, we'll have to look through each of our events. And we'll grab a list of matching sessions from this event. We do that by calling event. sessions, and we filter that down to a new list where the session's name,. lowercase, contains the term we're looking for. So we can just do index of term is greater than negative one. And now, since sessions don't actually contain the event ID that they belong to, I'm going to add in the event ID to the session. That'll be necessary because we're just getting back a list of sessions. When they click on a session, we need to go to the corresponding event, and therefore, we're going to need the event ID. But we're not bringing in the event along with the sessions. We're just getting the session itself. So, let's add in the event ID by mapping our matching sessions that we've just created. And we're going to specifically map the session to an any, so that we can add in the event ID. And we'll set it to the event's ID and then return that session. And that's a quick and easy way to add the event ID to every session that we've created. And now, we're going to take that results array and we're going to add to it using the concat method, this matchingSessions. Now we've got our results, and we want to return those back, but remember, we want this method to work when we move to HTML, and have the same kind of interface, which is going to be an observable. So we need to return an observable. And there's an easy way to do that. We can use the event emitter. So we'll create a new event emitter. We'll pass in a true, which will tell this emitter to deliver its events asychronously, and we don't have the event emitter importing yes, so let's go back up, at the very top, and it's an @angular/core. And we'll add an EventEmitter. Back down to our code. Once we have the event emitter, we're going to set a little time out just to kind of simulate what it would be like if we were actually using a web request. And we'll have the emitter emit the results, and let's time that out for 100 milliseconds. That'll simulate HTTP a little bit, and then we return the emitter, and now that we've written the methods, we want to see if they work, but I don't want to worry about hooking up UI quite just yet. So I'm going to go back to my NavBar, and I'm just going to log out to the console the sessions once we find them. We'll move that later on, but for now it's a quick and dirty way to find out if we returned the sessions that we were looking for. So let's save this, and we'll go back to the web page for our site, refresh it, and now let's put in some kind of a term. Let's look for pipe and hit enter, and look at the console, and we got an array with one item in it. And that item has an abstract, or a name, excuse me, is what we're looking for, of using Angular 4 Pipes. And that's what we did in our method. We searched for just the matching term in the name. Now we've got our search implemented, and we can now begin to hook up some UI.
+*/
+
 
 const EVENTS:IEvent[] = [
     {
