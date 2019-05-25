@@ -16,6 +16,7 @@ import {
   SessionListComponent,
   UpvoteComponent,
   DurationPipe,
+  VoterService
 } from './events/index'
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/nav-bar.component'
@@ -57,6 +58,7 @@ let jQuery = window['$'];
     { provide: JQ_TOKEN, useValue: jQuery },
     { provide: EventRouteActivator, useClass: EventRouteActivator },
     EventListResolver,
+    VoterService,
     AuthService,
     { 
       provide: 'canDeactivateCreateEvent', 
