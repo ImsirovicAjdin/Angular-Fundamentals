@@ -48,10 +48,3 @@
     <a class="list-group-item" *ngFor="let session of foundSessions" [routerLink]="['/events', session.eventId ]" >{{ session.name }}</a>
   </div>
 </simple-modal>
-<!--
-12.06 Creating Directives - The Trigger Directive
-
-12.06.02 First add custom attr: modal-trigger
-
-we'll go into our HTML, and what we want is on this button, we want to say, hey, when you're clicked, you are a trigger for my modal component. So maybe we could give it an attribute like modal-trigger, and that's an indication to Angular 2 that this button needs to trigger the modal. And if you know Angular 1, you'll know that we can do this with what's called a directive. In Angular 2, it's actually the same name. A component is an element, such as this right here. A directive is an attribute, such as this right here, and with a directive, we can attach new functionality to an existing DOM node. So this button, we want it to have another piece of functionality. We want it to be a trigger for our modal. So we're going to create this directive right now. 
--->
