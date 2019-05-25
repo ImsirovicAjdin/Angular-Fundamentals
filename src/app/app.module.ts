@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule, ActivatedRouteSnapshot } from '@angular/router'
@@ -16,7 +15,8 @@ import {
   SessionListComponent,
   UpvoteComponent,
   DurationPipe,
-  VoterService
+  VoterService,
+  LocationValidator
 } from './events/index'
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/nav-bar.component'
@@ -50,7 +50,8 @@ let jQuery = window['$'];
     CollapsibleWellComponent,
     SimpleModalComponent,
     ModalTriggerDirective,
-    UpvoteComponent
+    UpvoteComponent,
+    LocationValidator
   ],
   providers: [
     EventService, 
