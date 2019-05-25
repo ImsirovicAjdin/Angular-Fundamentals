@@ -41,3 +41,16 @@
     </div>
   </div>
 </div>
+
+
+<simple-modal title="Matching Sessions">
+  <div class="list-group">
+    <a class="list-group-item" *ngFor="let session of foundSessions" [routerLink]="['/events', session.eventId ]" >{{ session.name }}</a>
+  </div>
+</simple-modal>
+<!--
+12.04 Creating a Modal Component
+
+12.04.01 Creating the modal template for content projection
+With jQuery created, we can now begin creating our modal component. I want to know what that modal component's going to look like first. I'm going to go into the nav, into the HTML. Here is where I'm going to have the definition for my modal, from an HTML standpoint. We're going to use content projection as we learned previously. So we're going to have some kind of a modal component, and within that I want to put in the contents and display of the search results, so let's just look at that first, and we'll come back to our modal tag in a second. We're going to give this a class of list group, and for each item we're going to have an anchor tag. That's going to be a list group item, and we use an ngFor to repeat over our results, and it'll be a session, and that's the found sessions variable, remember, is getting filled in, and now we also need to link to the specific event, so I'm going to use a router link, and we're going to bind to our events path, and the second part is the ID, and again, this would translate to a URL of events/the session ID, so if it's Id3, would be event/3. And let's close up this tag, and now we want to print out the session's name, so I'll use just a plain binding, two open curly braces. Notice that it looks like there's only one open curly brace, but the second one is on the line before, the very last character, so don't let that confuse you. It's just the wrapping that's making it look different. And then we close up our a tag, close up our div, and then we will close up our modal tag. Now, calling this modal is probably not the best idea for a tag name. It's a very simple little modal component, so why don't we call it simple-modal, and I'd like to be able to set the title on my modal display. However that display looks, I'd like there to be a little title up at the top, and I want to set that, so let's add a title attribute, and we'll set it to Matching Sessions. Now one more thing I want to talk about before we begin implementing this component is this URL in the router link. Since we're not starting with a leading slash, this would be a relative path, and since our search results are available at any place in the application, because they're in the nav, we might already be down in some subdirectory, and that wouldn't work out for us, so we'll want to start from the route, and to do that we're going to need to add a leading slash, so that way, no matter where we're at, it's going to go to the root of our website /events/event ID, and let's save the changes here. And let's begin implementing this simple-modal component. I want this to be in the common directory, because it's a component that I might use anywhere in my application, so a new file here, and I'm not hyphenating the simple-modal.
+-->
