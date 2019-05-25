@@ -50,7 +50,7 @@ let jQuery = window['$'];
   providers: [
     EventService, 
     { provide: TOASTR_TOKEN, useValue: toastr },
-    { provide: JQ_TOKEN, useValue: jQuery }
+    { provide: JQ_TOKEN, useValue: jQuery },
     { provide: EventRouteActivator, useClass: EventRouteActivator },
     EventListResolver,
     AuthService,
