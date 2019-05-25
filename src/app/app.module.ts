@@ -77,3 +77,9 @@ export function checkDirtyState(component:CreateEventComponent) {
     return window.confirm('You have not saved this event, do you really want to cancel?')
   return true
 }
+/*
+Three more sections to do:
+Unit Testing Your Angular Code (36 minutes)
+Testing Angular Components with Integrated Tests (29 minutes)
+Taking an Angular App to Production (32 minutes)
+*/
