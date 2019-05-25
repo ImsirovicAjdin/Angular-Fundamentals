@@ -33,6 +33,8 @@ export class EventService {
       var matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1);
       matchingSessions = matchingSessions.map((session:any) => {
         sessionStorage.eventId = event.id;
+        console.log(sessionStorage.eventId);
+        console.log(session);
         return session;
       })
       results = results.concat(matchingSessions);
@@ -42,7 +44,7 @@ export class EventService {
     setTimeout(() => {
       emitter.emit(results);
 
-    }, 1400);
+    }, 100);
     return emitter;
   } 
 }
