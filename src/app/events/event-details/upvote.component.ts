@@ -21,6 +21,7 @@ export class UpvoteComponent {
     @Output() vote = new EventEmitter();
 
     onClick() {
+        console.log(this.count);
         this.vote.emit({});
     }
 }
